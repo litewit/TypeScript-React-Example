@@ -1,4 +1,13 @@
-# TypeScript-React-Example
+# TypeScript-React-Webpack-Example
+
+### Install our dependencies
+First ensure Webpack is installed globally.
+
+`npm install -g webpack`
+
+Webpack is a tool that bundle code and optionally all of its dependencies into a single .js file. In our case its `bundle.js`
+
+
 
 Just run:
 
