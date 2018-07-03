@@ -232,6 +232,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "react");
 var Clock_1 = __webpack_require__(/*! ./Clock */ "./src/components/Clock.tsx");
+var UserListControl_1 = __webpack_require__(/*! ./UserListControl */ "./src/components/UserListControl.tsx");
 function UserGreeting(props) {
     return React.createElement("h1", null, "Welcome back!");
 }
@@ -280,7 +281,8 @@ var LoginControl = /** @class */ (function (_super) {
         return (React.createElement("div", null,
             React.createElement(Greeting, { isLoggedIn: isLoggedIn }),
             React.createElement(AuthButton, { onLogoutClick: this.handleLogoutClick, onLoginClick: this.handleLoginClick, isLoggedIn: isLoggedIn }),
-            isLoggedIn ? React.createElement(Clock_1.default, null) : ''));
+            isLoggedIn ? React.createElement(Clock_1.default, null) : '',
+            isLoggedIn ? React.createElement(UserListControl_1.default, null) : ''));
     };
     return LoginControl;
 }(React.Component));
@@ -333,6 +335,66 @@ var Toggle = /** @class */ (function (_super) {
     return Toggle;
 }(React.Component));
 exports.default = Toggle;
+
+
+/***/ }),
+
+/***/ "./src/components/UserListControl.tsx":
+/*!********************************************!*\
+  !*** ./src/components/UserListControl.tsx ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "react");
+function Avatar(props) {
+    return (React.createElement("img", { className: "Avatar", src: props.avatar, alt: props.name }));
+}
+function UserInfo(props) {
+    return (React.createElement("div", { key: props.user.id, className: "UserInfo" },
+        React.createElement(Avatar, { avatar: props.user.avatar, name: props.user.name }),
+        React.createElement("div", { className: "UserInfo-name" }, props.user.name),
+        React.createElement("div", { className: "UserInfo-date" }, props.user.createdAt)));
+}
+var UserListControl = /** @class */ (function (_super) {
+    __extends(UserListControl, _super);
+    function UserListControl(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = { users: [] };
+        return _this;
+    }
+    UserListControl.prototype.componentDidMount = function () {
+        var _this = this;
+        fetch('http://5b24ffcd7557bd0014990103.mockapi.io/api/v1/items')
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+            _this.setState({ users: data });
+        });
+    };
+    UserListControl.prototype.componentWillUnmount = function () {
+        console.log('Item Controller unmounted');
+    };
+    UserListControl.prototype.render = function () {
+        var users = this.state.users;
+        var itemElements = users.map(function (user, key) { return React.createElement(UserInfo, { user: user }); });
+        return (React.createElement("div", null, itemElements));
+    };
+    return UserListControl;
+}(React.Component));
+exports.default = UserListControl;
 
 
 /***/ }),
