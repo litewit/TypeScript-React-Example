@@ -1,4 +1,5 @@
 import * as React from 'react';
+require('./App.css');
 import Hello from "./Hello";
 import Toggle from "./Toggle";
 import LoginControl from "./LoginControl";
