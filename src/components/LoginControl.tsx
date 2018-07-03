@@ -1,4 +1,5 @@
 import * as React from 'react';
+import Clock from "./Clock";
 
 function UserGreeting(props: any) {
     return <h1>Welcome back!</h1>;
@@ -66,6 +67,7 @@ class LoginControl extends React.Component {
             <div>
                 <Greeting isLoggedIn={isLoggedIn} />
                 <AuthButton onLogoutClick={this.handleLogoutClick} onLoginClick={this.handleLoginClick} isLoggedIn={isLoggedIn} />
+                {isLoggedIn? <Clock/> : ''}
             </div>
         );
     }

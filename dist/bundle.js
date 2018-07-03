@@ -120,15 +120,66 @@ var App = /** @class */ (function (_super) {
             React.createElement("header", { className: "App-header" },
                 React.createElement(Hello_1.default, { developer: "LiteWit", compiler: "TypeScript", framework: "React" })),
             React.createElement(Toggle_1.default, null),
-            React.createElement(LoginControl_1.default, null),
-            React.createElement("p", { className: "App-intro" },
-                "To get started, edit ",
-                React.createElement("code", null, "src/App.tsx"),
-                " and save to reload.")));
+            React.createElement(LoginControl_1.default, null)));
     };
     return App;
 }(React.Component));
 exports.default = App;
+
+
+/***/ }),
+
+/***/ "./src/components/Clock.tsx":
+/*!**********************************!*\
+  !*** ./src/components/Clock.tsx ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var React = __webpack_require__(/*! react */ "react");
+var Clock = /** @class */ (function (_super) {
+    __extends(Clock, _super);
+    function Clock(props) {
+        var _this = _super.call(this, props) || this;
+        _this.state = { date: new Date() };
+        return _this;
+    }
+    Clock.prototype.componentDidMount = function () {
+        var _this = this;
+        this.timerID = setInterval(function () { return _this.tick(); }, 1000);
+    };
+    Clock.prototype.componentWillUnmount = function () {
+        clearInterval(this.timerID);
+        console.log('clear timer');
+    };
+    Clock.prototype.tick = function () {
+        this.setState({
+            date: new Date()
+        });
+    };
+    Clock.prototype.render = function () {
+        return (React.createElement("div", null,
+            React.createElement("h2", null,
+                "It is ",
+                this.state.date.toLocaleTimeString(),
+                ".")));
+    };
+    return Clock;
+}(React.Component));
+exports.default = Clock;
 
 
 /***/ }),
@@ -180,6 +231,7 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "react");
+var Clock_1 = __webpack_require__(/*! ./Clock */ "./src/components/Clock.tsx");
 function UserGreeting(props) {
     return React.createElement("h1", null, "Welcome back!");
 }
@@ -227,7 +279,8 @@ var LoginControl = /** @class */ (function (_super) {
         var isLoggedIn = this.state.isLoggedIn;
         return (React.createElement("div", null,
             React.createElement(Greeting, { isLoggedIn: isLoggedIn }),
-            React.createElement(AuthButton, { onLogoutClick: this.handleLogoutClick, onLoginClick: this.handleLoginClick, isLoggedIn: isLoggedIn })));
+            React.createElement(AuthButton, { onLogoutClick: this.handleLogoutClick, onLoginClick: this.handleLoginClick, isLoggedIn: isLoggedIn }),
+            isLoggedIn ? React.createElement(Clock_1.default, null) : ''));
     };
     return LoginControl;
 }(React.Component));
@@ -259,7 +312,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(/*! react */ "react");
 var Toggle = /** @class */ (function (_super) {
     __extends(Toggle, _super);
-    // prevState: any;
     function Toggle(props) {
         var _this = _super.call(this, props) || this;
         _this.state = { isToggleOn: true };
@@ -268,9 +320,9 @@ var Toggle = /** @class */ (function (_super) {
         return _this;
     }
     Toggle.prototype.handleClick = function () {
-        var prevState = this.state;
+        var prevStateToggle = this.state.isToggleOn;
         this.setState({
-            isToggleOn: !prevState.isToggleOn
+            isToggleOn: !prevStateToggle
         });
     };
     Toggle.prototype.render = function () {

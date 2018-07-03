@@ -3,7 +3,6 @@ import * as React from 'react';
 class Toggle extends React.Component<any, any> {
 
     state: any;
-    // prevState: any;
 
     constructor(props: any) {
         super(props);
@@ -14,9 +13,9 @@ class Toggle extends React.Component<any, any> {
     }
 
     handleClick() {
-        let prevState = this.state;
+        const prevStateToggle = this.state.isToggleOn;
         this.setState({
-            isToggleOn: !prevState.isToggleOn
+            isToggleOn: !prevStateToggle
         });
     }
 
