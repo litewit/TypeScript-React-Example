@@ -19,16 +19,16 @@ class Toggle extends React.Component<any, any> {
         });
     }
 
-  public render() {
-    return (
-        <div>
-        <span>Toogle button </span>
-        <button onClick={this.handleClick}>
-        {this.state.isToggleOn ? 'ON' : 'OFF'}
-        </button>
-        </div>
-    );
-  }
+    public render() {
+        return (
+            <div>
+            <span>Toogle button </span>
+            <button onClick={this.handleClick}>
+            {this.state.isToggleOn ? 'ON' : 'OFF'}
+            </button>
+            </div>
+        );
+    }
 }
 
 export default Toggle;
